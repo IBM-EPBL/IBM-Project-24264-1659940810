@@ -5,7 +5,7 @@ import ibm_db
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 conn = ibm_db.connect(
-    "DATABASE=bludb;HOSTNAME=8e359033-a1c9-4643-82ef-8ac06f5107eb.bs2io90l08kqb1od8lcg.databases.appdomain.cloud;PORT=30120;SECURITY=SSL;SSLServerCertificate=DigiCertGlobalRootCA.crt;UID=xcc29401;PWD=RruJpiHJYrlUp9qT", '', '')
+    "", '', '')
 
 
 app = Flask(__name__)
@@ -61,7 +61,7 @@ def userregister():
                 html_content='Hello '+username + ',\n\n' + """\n\nThank you for registering as a customer with Customer Care Registry Application. """)
 
             sg = SendGridAPIClient(
-                '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')
+                'YOUR_API_KEY')
             response = sg.send(message)
             stmt = "SELECT TOTALNOTIFICATIONS FROM ADMIN WHERE ADMINUSERNAME=?"
             prep_stmt = ibm_db.prepare(conn, stmt)
@@ -177,7 +177,7 @@ def agentregister():
                 html_content='Hello '+username + ',\n\n' + """\n\nYou have successfully registered as an agent with Customer Care Registry. You can login and access your dashboard now.""")
 
             sg = SendGridAPIClient(
-                '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')
+                'YOUR_API_KEY')
             response = sg.send(message)
             stmt = "SELECT TOTALNOTIFICATIONS FROM ADMIN WHERE ADMINUSERNAME=?"
             prep_stmt = ibm_db.prepare(conn, stmt)
