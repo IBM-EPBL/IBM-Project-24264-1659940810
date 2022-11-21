@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webpage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webpage
+  template:
+    metadata:
+      labels:
+        app: webpage
+    spec:
+      containers:
+        - name: webpage
+          image: us.icr.io/gokulcj7/flask
+          imagePullPolicy: Always
+          ports:
+            - Port: 5000
+              type: NodePort
